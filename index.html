@@ -520,8 +520,100 @@
         
         .about-image {
             aspect-ratio: 1/1;
-            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Fat_Chance_Kicker_Mountain_Bike.jpg/600px-Fat_Chance_Kicker_Mountain_Bike.jpg') center/cover no-repeat;
             position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .gallery-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .gallery-slide.active {
+            opacity: 1;
+        }
+        
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+        
+        .gallery-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .gallery-dot.active {
+            background: var(--rust);
+        }
+        
+        .gallery-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+        
+        .gallery-arrow {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.8);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .gallery-arrow:hover {
+            background: var(--rust);
+            color: white;
+        }
+        
+        .step-counter {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--rust);
+            color: white;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 10;
         }
         
         /* Rust frame effect */
@@ -531,6 +623,8 @@
             inset: -12px;
             border: 2px solid transparent;
             border-image: linear-gradient(135deg, var(--rust), var(--copper-green), var(--aged-bronze)) 1;
+            z-index: 5;
+            pointer-events: none;
         }
         
         .about-content h2 {
@@ -730,12 +824,20 @@
     <section id="about" class="about-section">
         <div class="container">
             <div class="about-grid">
-                <div class="about-image"></div>
+                <div class="about-image">
+                    <div class="gallery-container" id="process-gallery">
+                        <div class="step-counter">Step <span id="step-num">1</span>/10</div>
+                        <div class="gallery-arrows">
+                            <button class="gallery-arrow" onclick="prevSlide()">←</button>
+                            <button class="gallery-arrow" onclick="nextSlide()">→</button>
+                        </div>
+                        <div class="gallery-nav" id="gallery-dots"></div>
+                    </div>
+                </div>
                 <div class="about-content">
-                    <h2>Preserved, Not Polished</h2>
-                    <p>Every bike here carries its history. The scratches from rocky descents. The worn decals from decades of storage. The honest patina of a machine that was ridden, not displayed.</p>
-                    <p>I don't strip and repaint. I don't hide the dents. I clean, service, and preserve. What you get is authentic - a time capsule from mountain biking's defining years.</p>
-                    <p>Based in Central Europe, shipping across the continent. Each bike photographed as-is, flaws and all.</p>
+                    <h2 id="process-title">Preserved, Not Polished</h2>
+                    <p id="process-text-1">Every bike here carries its history. The scratches from rocky descents. The worn decals from decades of storage. The honest patina of a machine that was ridden, not displayed.</p>
+                    <p id="process-text-2">I don't strip and repaint. I don't hide the dents. I clean, service, and preserve. What you get is authentic - a time capsule from mountain biking's defining years.</p>
                 </div>
             </div>
         </div>
@@ -892,7 +994,130 @@
             e.target.reset();
         }
         
+        // Process Gallery - 10 Steps of Patina Preservation
+        const processSteps = [
+            {
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Fat_Chance_Kicker_Mountain_Bike.jpg/600px-Fat_Chance_Kicker_Mountain_Bike.jpg',
+                title: 'Preserved, Not Polished',
+                text1: 'Every bike here carries its history. The scratches from rocky descents. The worn decals from decades of storage. The honest patina of a machine that was ridden, not displayed.',
+                text2: 'Here\'s how I bring these time capsules back to life - without erasing their story.'
+            },
+            {
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Old_Bicycle_Repair_Shop_%2837701512021%29.jpg/600px-Old_Bicycle_Repair_Shop_%2837701512021%29.jpg',
+                title: 'Step 1: Assessment',
+                text1: 'Every project starts with a thorough inspection. I examine the frame for cracks, check bearing play, test the drivetrain, and document every scratch and dent.',
+                text2: 'This initial assessment tells me what the bike needs - and what character it already has that must be preserved.'
+            },
+            {
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Bicycle_repair_shop_-_bike_parts_on_work_bench.jpg/600px-Bicycle_repair_shop_-_bike_parts_on_work_bench.jpg',
+                title: 'Step 2: Careful Disassembly',
+                text1: 'The bike comes apart piece by piece. Every component is labeled and photographed. Original bolts, washers, and spacers are kept - they\'re part of the story.',
+                text2: 'Patience here prevents damage. Seized parts get penetrating oil and time, not brute force.'
+            },
+            {
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Bicycle_cone_wrenches_at_Somerville_Bike_Kitchen.jpg/600px-Bicycle_cone_wrenches_at_Somerville_Bike_Kitchen.jpg',
+                title: 'Step 3: Bearing Inspection',
+                text1: 'Headset, bottom bracket, hubs - all bearings are disassembled and inspected. Pitted races get replaced; healthy ones get fresh grease.',
+                text2: 'Good bearings are the foundation of a bike that rides as well as it looks.'
+            },
+            {
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Shimano_Exage_500_Derailleur.jpg/600px-Shimano_Exage_500_Derailleur.jpg',
+                title: 'Step 4: Drivetrain Service',
+                text1: 'Derailleurs are disassembled, degreased, and re-lubricated. Pivot points freed, springs checked, limit screws adjusted.',
+                text2: 'A 30-year-old Shimano groupset can still shift like new with proper care.'
+            },
+            {
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/India_-_Varanasi_bike_cleaning_-_1382.jpg/600px-India_-_Varanasi_bike_cleaning_-_1382.jpg',
+                title: 'Step 5: Gentle Cleaning',
+                text1: 'The frame gets cleaned with mild soap and soft brushes - never abrasive pads or harsh chemicals. The goal is clean, not shiny.',
+                text2: 'Original decals are treated like artifacts. Loose edges get carefully re-adhered; missing ones stay missing.'
+            },
+            {
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Bike_workshop_-_bicycle_repair_shop.jpg/600px-Bike_workshop_-_bicycle_repair_shop.jpg',
+                title: 'Step 6: Rust Stabilization',
+                text1: 'Surface rust isn\'t removed - it\'s converted. A rust converter chemically stabilizes the oxidation, turning it into a protective layer.',
+                text2: 'The patina stays, but it stops spreading. History preserved, not erased.'
+            },
+            {
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Munich_-_Two_men_working_in_a_Bicycle_repair_shop_-_5893.jpg/600px-Munich_-_Two_men_working_in_a_Bicycle_repair_shop_-_5893.jpg',
+                title: 'Step 7: Clear Coat Protection',
+                text1: 'A thin, matte clear coat seals the original paint and stabilized patina. It protects without adding shine or changing the character.',
+                text2: 'This is the secret to preservation: lock in what\'s there, don\'t cover it up.'
+            },
+            {
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Shimano_105_Derailleur_RD-1055.jpg/600px-Shimano_105_Derailleur_RD-1055.jpg',
+                title: 'Step 8: Component Rebuild',
+                text1: 'Fresh cables and housing. New brake pads. Serviced hubs. The bike gets everything it needs to ride safely and smoothly.',
+                text2: 'Original components stay when possible. Replacements match the era when needed.'
+            },
+            {
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/GT_Zaskar_2012.JPG/600px-GT_Zaskar_2012.JPG',
+                title: 'Step 9: Careful Reassembly',
+                text1: 'Everything goes back together with proper torque specs. Original hardware in original locations. Nothing forced, nothing forgotten.',
+                text2: 'The bike should feel like it did in 1993 - just cleaner and smoother.'
+            },
+            {
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Klein_Attitude_Gossomer_Paint%3B_2008%2C_03._09.%2C_02.JPG/600px-Klein_Attitude_Gossomer_Paint%3B_2008%2C_03._09.%2C_02.JPG',
+                title: 'Step 10: Final Inspection',
+                text1: 'Every bolt checked. Every function tested. Gears indexed. Brakes adjusted. The bike gets a test ride before photos.',
+                text2: 'What you see is what you get: a preserved time capsule, ready for another 30 years of history.'
+            }
+        ];
+        
+        let currentSlide = 0;
+        
+        function initGallery() {
+            const gallery = document.getElementById('process-gallery');
+            const dotsContainer = document.getElementById('gallery-dots');
+            
+            // Create slides
+            processSteps.forEach((step, i) => {
+                const slide = document.createElement('div');
+                slide.className = 'gallery-slide' + (i === 0 ? ' active' : '');
+                slide.innerHTML = `<img src="${step.image}" alt="${step.title}">`;
+                gallery.insertBefore(slide, gallery.firstChild);
+                
+                const dot = document.createElement('div');
+                dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            });
+            
+            updateText();
+        }
+        
+        function updateText() {
+            const step = processSteps[currentSlide];
+            document.getElementById('process-title').textContent = step.title;
+            document.getElementById('process-text-1').textContent = step.text1;
+            document.getElementById('process-text-2').textContent = step.text2;
+            document.getElementById('step-num').textContent = currentSlide + 1;
+            
+            document.querySelectorAll('.gallery-slide').forEach((s, i) => {
+                s.classList.toggle('active', i === (processSteps.length - 1 - currentSlide));
+            });
+            document.querySelectorAll('.gallery-dot').forEach((d, i) => {
+                d.classList.toggle('active', i === currentSlide);
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % processSteps.length;
+            updateText();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + processSteps.length) % processSteps.length;
+            updateText();
+        }
+        
+        function goToSlide(i) {
+            currentSlide = i;
+            updateText();
+        }
+        
         render();
+        initGallery();
     </script>
 </body>
 </html>
