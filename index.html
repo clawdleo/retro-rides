@@ -5,35 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retro Rides | Vintage Mountain Bikes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0a;
-            --bg-card: #141414;
-            --bg-accent: #1a1a1a;
-            --text: #fafafa;
-            --text-dim: #888;
-            --accent: #f97316;
-            --accent-hover: #fb923c;
-            --green: #22c55e;
-            --border: #2a2a2a;
+            --bg: #ffffff;
+            --bg-alt: #f8f8f8;
+            --text: #1a1a1a;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --accent: #c45a3b;
+            --accent-hover: #a94829;
+            --border: #e5e5e5;
+            --card-shadow: 0 2px 20px rgba(0,0,0,0.06);
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            font-weight: 400;
+            font-size: 15px;
         }
         
         a { color: inherit; text-decoration: none; }
         
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 40px;
+        }
+        
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 500;
+            letter-spacing: -0.02em;
         }
         
         /* Navigation */
@@ -42,126 +51,167 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(10,10,10,0.9);
+            background: rgba(255,255,255,0.98);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
             z-index: 100;
-            padding: 15px 0;
+            padding: 0;
         }
         
-        nav .container {
+        .nav-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 70px;
         }
         
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent);
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
         }
         
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 40px;
         }
         
         .nav-links a {
-            color: var(--text-dim);
+            font-size: 0.9rem;
+            color: var(--text-light);
             font-weight: 500;
             transition: color 0.2s;
+            letter-spacing: 0.02em;
         }
         
         .nav-links a:hover { color: var(--text); }
         
         /* Hero */
         .hero {
-            min-height: 100vh;
+            min-height: 85vh;
             display: flex;
             align-items: center;
-            padding-top: 80px;
-            background: linear-gradient(135deg, var(--bg) 0%, #1a1008 100%);
+            padding-top: 70px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #fff 50%, #faf8f6 100%);
             position: relative;
             overflow: hidden;
         }
         
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: -200px;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(249,115,22,0.1) 0%, transparent 70%);
-            transform: translateY(-50%);
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
         }
         
         .hero-content {
-            max-width: 600px;
+            max-width: 520px;
         }
         
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            line-height: 1.1;
+        .hero-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            font-weight: 600;
             margin-bottom: 20px;
         }
         
-        .hero h1 span { color: var(--accent); }
+        .hero h1 {
+            font-size: clamp(2.8rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
         
         .hero p {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            margin-bottom: 30px;
+            font-size: 1.05rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            line-height: 1.7;
         }
         
         .btn {
             display: inline-block;
-            padding: 15px 30px;
+            padding: 16px 36px;
             background: var(--accent);
-            color: #000;
-            font-weight: 600;
-            border-radius: 8px;
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.03em;
+            border: none;
+            cursor: pointer;
             transition: all 0.2s;
         }
         
         .btn:hover {
             background: var(--accent-hover);
-            transform: translateY(-2px);
         }
         
         .btn-outline {
             background: transparent;
-            border: 2px solid var(--border);
+            border: 1px solid var(--border);
             color: var(--text);
-            margin-left: 15px;
+            margin-left: 16px;
         }
         
         .btn-outline:hover {
-            border-color: var(--accent);
+            border-color: var(--text);
             background: transparent;
         }
         
-        /* Stats */
-        .stats {
+        .hero-image {
+            position: relative;
+            height: 500px;
             display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+        
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--bg-alt);
+            padding: 50px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 40px;
-            margin-top: 50px;
+            text-align: center;
         }
         
-        .stat {
-            text-align: left;
+        .stat-item {
+            padding: 0 20px;
         }
         
-        .stat-num {
+        .stat-number {
+            font-family: 'Cormorant Garamond', Georgia, serif;
             font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent);
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 8px;
         }
         
         .stat-label {
-            color: var(--text-dim);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
         
         /* Section */
@@ -174,310 +224,384 @@
             margin-bottom: 60px;
         }
         
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
         .section-header h2 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+            font-size: 2.4rem;
+            margin-bottom: 16px;
         }
         
         .section-header p {
-            color: var(--text-dim);
-            max-width: 600px;
+            color: var(--text-light);
+            max-width: 500px;
             margin: 0 auto;
         }
         
-        /* Bike Grid */
-        .bike-grid {
+        /* Product Grid */
+        .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+            gap: 30px;
         }
         
-        .bike-card {
-            background: var(--bg-card);
-            border-radius: 12px;
-            overflow: hidden;
+        .product-card {
+            background: var(--bg);
             border: 1px solid var(--border);
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
         
-        .bike-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
+        .product-card:hover {
+            box-shadow: var(--card-shadow);
+            transform: translateY(-4px);
         }
         
-        .bike-card.sold {
-            opacity: 0.7;
+        .product-card.sold {
+            opacity: 0.6;
         }
         
-        .bike-card.sold .bike-img::after {
-            content: 'SOLD';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg);
-            background: var(--green);
-            color: #000;
-            padding: 10px 30px;
-            font-weight: 700;
-            font-size: 1.5rem;
-            border-radius: 4px;
-        }
-        
-        .bike-img {
+        .product-image {
             position: relative;
-            height: 220px;
-            background: var(--bg-accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            aspect-ratio: 4/3;
+            background: var(--bg-alt);
+            overflow: hidden;
         }
         
-        .bike-img img {
+        .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.4s ease;
         }
         
-        .bike-img .placeholder {
-            font-size: 4rem;
-            opacity: 0.3;
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
         }
         
-        .bike-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: var(--accent);
-            color: #000;
-            padding: 5px 12px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .bike-info {
-            padding: 20px;
-        }
-        
-        .bike-brand {
-            color: var(--accent);
+        .product-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
             font-size: 0.85rem;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: var(--accent);
+            color: #fff;
+            padding: 6px 14px;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.05em;
         }
         
-        .bike-name {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin: 8px 0;
+        .product-badge.sold-badge {
+            background: #333;
         }
         
-        .bike-year {
-            color: var(--text-dim);
-            font-size: 0.9rem;
+        .product-info {
+            padding: 24px;
         }
         
-        .bike-price {
+        .product-brand {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        .product-name {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .product-year {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+        
+        .product-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 15px;
-            padding-top: 15px;
+            padding-top: 16px;
             border-top: 1px solid var(--border);
         }
         
-        .price {
+        .product-price {
+            font-family: 'Cormorant Garamond', Georgia, serif;
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 600;
         }
         
-        .bike-card.sold .price {
+        .product-card.sold .product-price {
             text-decoration: line-through;
-            opacity: 0.5;
+            color: var(--text-muted);
+        }
+        
+        .product-btn {
+            font-size: 0.8rem;
+            padding: 10px 20px;
+            background: var(--text);
+            color: #fff;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .product-btn:hover {
+            background: var(--accent);
         }
         
         /* About */
-        .about {
-            background: var(--bg-card);
+        .about-section {
+            background: var(--bg-alt);
         }
         
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 80px;
             align-items: center;
         }
         
-        .about-text h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        
-        .about-text p {
-            color: var(--text-dim);
-            margin-bottom: 15px;
-        }
-        
-        .about-img {
-            height: 400px;
-            background: var(--bg-accent);
-            border-radius: 12px;
+        .about-image {
+            aspect-ratio: 4/3;
+            background: #e8e8e8;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 5rem;
-            opacity: 0.5;
+            color: var(--text-muted);
+        }
+        
+        .about-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 24px;
+        }
+        
+        .about-content p {
+            color: var(--text-light);
+            margin-bottom: 16px;
+            line-height: 1.8;
         }
         
         /* Contact */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 80px;
         }
         
         .contact-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.8rem;
+            margin-bottom: 24px;
         }
         
         .contact-info p {
-            color: var(--text-dim);
-            margin-bottom: 30px;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            line-height: 1.7;
         }
         
         .contact-item {
             display: flex;
-            align-items: center;
-            gap: 15px;
+            align-items: flex-start;
+            gap: 16px;
             margin-bottom: 20px;
-            color: var(--text-dim);
+            color: var(--text-light);
+            font-size: 0.95rem;
         }
         
-        .contact-item span:first-child {
-            font-size: 1.5rem;
+        .contact-item-label {
+            font-weight: 600;
+            color: var(--text);
+            min-width: 80px;
         }
         
         .contact-form input,
         .contact-form textarea {
             width: 100%;
-            padding: 15px;
-            background: var(--bg-card);
+            padding: 16px 20px;
+            background: var(--bg);
             border: 1px solid var(--border);
-            border-radius: 8px;
             color: var(--text);
             font-family: inherit;
-            margin-bottom: 15px;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
         }
         
         .contact-form textarea {
-            min-height: 150px;
+            min-height: 140px;
             resize: vertical;
         }
         
         .contact-form input:focus,
         .contact-form textarea:focus {
             outline: none;
-            border-color: var(--accent);
+            border-color: var(--text);
+        }
+        
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--text-muted);
         }
         
         /* Footer */
         footer {
-            background: var(--bg-card);
-            padding: 40px 0;
-            text-align: center;
-            border-top: 1px solid var(--border);
+            background: var(--text);
+            color: #fff;
+            padding: 60px 0;
         }
         
-        footer p {
-            color: var(--text-dim);
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .footer-text {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            grid-column: 1 / -1;
         }
         
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
+            .container { padding: 0 24px; }
+            .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero { min-height: auto; padding: 120px 0 80px; }
+            .hero-image { height: 350px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
             .nav-links { display: none; }
-            .stats { flex-wrap: wrap; gap: 20px; }
-            .about-grid, .contact-grid { grid-template-columns: 1fr; }
-            .hero { text-align: center; }
-            .hero-content { margin: 0 auto; }
-            .stats { justify-content: center; }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .product-grid { grid-template-columns: 1fr; }
+            .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
         }
     </style>
 </head>
 <body>
     <nav>
         <div class="container">
-            <a href="#" class="logo">🚲 Retro Rides</a>
-            <div class="nav-links">
-                <a href="#bikes">Available</a>
-                <a href="#sold">Sold</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
+            <div class="nav-inner">
+                <a href="#" class="logo">Retro Rides</a>
+                <div class="nav-links">
+                    <a href="#collection">Collection</a>
+                    <a href="#sold">Sold</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </div>
             </div>
         </div>
     </nav>
     
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h1>Vintage Mountain Bikes.<br><span>Restored with Love.</span></h1>
-                <p>Hand-picked classics from the golden era of mountain biking. Each bike carefully restored and ready to ride.</p>
-                <a href="#bikes" class="btn">View Collection</a>
-                <a href="#contact" class="btn btn-outline">Get in Touch</a>
-                
-                <div class="stats">
-                    <div class="stat">
-                        <div class="stat-num" id="stat-sold">0</div>
-                        <div class="stat-label">Bikes Sold</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-num" id="stat-available">0</div>
-                        <div class="stat-label">Available Now</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-num">80s-90s</div>
-                        <div class="stat-label">Era Specialty</div>
-                    </div>
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-label">Vintage Mountain Bikes</div>
+                    <h1>Timeless Steel,<br>Ready to Ride</h1>
+                    <p>Hand-selected classics from the golden era of mountain biking. Each bike carefully restored and waiting for its next adventure.</p>
+                    <a href="#collection" class="btn">View Collection</a>
+                    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-image-placeholder">Featured bike image</div>
                 </div>
             </div>
         </div>
     </section>
     
-    <section id="bikes">
+    <div class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" id="stat-available">0</div>
+                    <div class="stat-label">Available</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="stat-sold">0</div>
+                    <div class="stat-label">Sold</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">80–90s</div>
+                    <div class="stat-label">Era</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">EU</div>
+                    <div class="stat-label">Shipping</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <section id="collection">
         <div class="container">
             <div class="section-header">
-                <h2>🚲 Available Now</h2>
-                <p>Ready to ride. Each bike has been inspected, serviced, and is waiting for its new owner.</p>
+                <div class="section-label">Current Stock</div>
+                <h2>Available Now</h2>
+                <p>Ready to ride. Each bike inspected, serviced, and prepared for its new owner.</p>
             </div>
-            <div class="bike-grid" id="available-grid">
-                <!-- Bikes loaded dynamically -->
-            </div>
+            <div class="product-grid" id="available-grid"></div>
         </div>
     </section>
     
-    <section id="sold" style="background: var(--bg-card)">
+    <section id="sold" style="background: var(--bg-alt)">
         <div class="container">
             <div class="section-header">
-                <h2>✅ Recently Sold</h2>
-                <p>Found new homes. Check out what's been rolling out of the shop.</p>
+                <div class="section-label">Previous Sales</div>
+                <h2>Recently Sold</h2>
+                <p>These bikes found new homes. More arriving regularly.</p>
             </div>
-            <div class="bike-grid" id="sold-grid">
-                <!-- Sold bikes loaded dynamically -->
-            </div>
+            <div class="product-grid" id="sold-grid"></div>
         </div>
     </section>
     
-    <section id="about" class="about">
+    <section id="about" class="about-section">
         <div class="container">
             <div class="about-grid">
-                <div class="about-text">
+                <div class="about-image">Workshop photo</div>
+                <div class="about-content">
                     <h2>The Hunt for Vintage Steel</h2>
                     <p>Every bike in my collection is hand-picked from across Europe. I search marketplaces daily, looking for hidden gems — classic Stumpjumpers, rare Kleins, forgotten GT Zaskars.</p>
-                    <p>When I find one, I bring it back to life. New cables, fresh grease, tuned derailleurs. Some get a full restoration. Others just need a little love.</p>
-                    <p>These aren't just bikes — they're pieces of mountain biking history. Built when frames were steel and rides were real.</p>
+                    <p>When I find one, I bring it back to life. New cables, fresh grease, tuned derailleurs. Some get full restorations. Others just need a little care.</p>
+                    <p>These aren't just bikes — they're pieces of mountain biking history, built when frames were steel and rides were real.</p>
                 </div>
-                <div class="about-img">🔧</div>
             </div>
         </div>
     </section>
@@ -485,30 +609,31 @@
     <section id="contact">
         <div class="container">
             <div class="section-header">
-                <h2>📬 Get in Touch</h2>
+                <div class="section-label">Get in Touch</div>
+                <h2>Contact</h2>
                 <p>Interested in a bike? Have one to sell? Let's talk.</p>
             </div>
             <div class="contact-grid">
                 <div class="contact-info">
-                    <h3>Let's Connect</h3>
-                    <p>Based in Slovenia/Austria region. Local pickup available, or we can arrange shipping within Europe.</p>
+                    <h3>Location & Shipping</h3>
+                    <p>Based in the Slovenia/Austria region. Local pickup available, or shipping arranged within Europe.</p>
                     <div class="contact-item">
-                        <span>📍</span>
+                        <span class="contact-item-label">Location</span>
                         <span>Slovenia / Austria</span>
                     </div>
                     <div class="contact-item">
-                        <span>📧</span>
-                        <span>retro.rides@email.com</span>
+                        <span class="contact-item-label">Email</span>
+                        <span>hello@retrorides.eu</span>
                     </div>
                     <div class="contact-item">
-                        <span>💬</span>
-                        <span>WhatsApp available</span>
+                        <span class="contact-item-label">Response</span>
+                        <span>Within 24 hours</span>
                     </div>
                 </div>
                 <form class="contact-form" onsubmit="handleSubmit(event)">
                     <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <textarea placeholder="Message — tell me which bike you're interested in!"></textarea>
+                    <input type="email" placeholder="Email Address" required>
+                    <textarea placeholder="Your message — which bike interests you?"></textarea>
                     <button type="submit" class="btn" style="width:100%">Send Message</button>
                 </form>
             </div>
@@ -517,44 +642,48 @@
     
     <footer>
         <div class="container">
-            <p>© 2026 Retro Rides. Vintage bikes, modern passion.</p>
+            <div class="footer-inner">
+                <div class="footer-logo">Retro Rides</div>
+                <div class="footer-text">Vintage bikes, modern passion. Est. 2026</div>
+            </div>
         </div>
     </footer>
     
     <script>
-        // Bike inventory data
         const inventory = {
             available: [
                 {
                     id: 1,
                     brand: 'Kuwahara',
                     name: 'Kuwahara MTB',
-                    year: '~1990',
-                    price: 19,
-                    badge: 'New Find!',
+                    year: 'Circa 1990',
+                    price: 149,
+                    badge: 'Just In',
                     image: null,
-                    description: 'Classic Japanese steel'
+                    description: 'Classic Japanese steel frame'
                 }
             ],
-            sold: [
-                // Add sold bikes here as you sell them
-            ]
+            sold: []
         };
         
-        function renderBike(bike, isSold = false) {
+        function renderProduct(item, isSold = false) {
             return `
-                <article class="bike-card ${isSold ? 'sold' : ''}">
-                    <div class="bike-img">
-                        ${bike.image ? `<img src="${bike.image}" alt="${bike.name}">` : '<span class="placeholder">🚲</span>'}
-                        ${bike.badge && !isSold ? `<span class="bike-badge">${bike.badge}</span>` : ''}
+                <article class="product-card ${isSold ? 'sold' : ''}">
+                    <div class="product-image">
+                        ${item.image 
+                            ? `<img src="${item.image}" alt="${item.name}">`
+                            : `<div class="product-image-placeholder">Photo coming soon</div>`
+                        }
+                        ${item.badge && !isSold ? `<span class="product-badge">${item.badge}</span>` : ''}
+                        ${isSold ? `<span class="product-badge sold-badge">Sold</span>` : ''}
                     </div>
-                    <div class="bike-info">
-                        <div class="bike-brand">${bike.brand}</div>
-                        <h3 class="bike-name">${bike.name}</h3>
-                        <div class="bike-year">${bike.year}</div>
-                        <div class="bike-price">
-                            <span class="price">€${bike.price}</span>
-                            ${!isSold ? '<a href="#contact" class="btn" style="padding:8px 16px;font-size:0.85rem">Inquire</a>' : ''}
+                    <div class="product-info">
+                        <div class="product-brand">${item.brand}</div>
+                        <h3 class="product-name">${item.name}</h3>
+                        <div class="product-year">${item.year}</div>
+                        <div class="product-footer">
+                            <span class="product-price">€${item.price}</span>
+                            ${!isSold ? `<a href="#contact" class="product-btn">Inquire</a>` : ''}
                         </div>
                     </div>
                 </article>
@@ -562,30 +691,28 @@
         }
         
         function render() {
-            // Available bikes
             const availableGrid = document.getElementById('available-grid');
-            if (inventory.available.length > 0) {
-                availableGrid.innerHTML = inventory.available.map(b => renderBike(b, false)).join('');
-            } else {
-                availableGrid.innerHTML = '<p style="text-align:center;color:var(--text-dim);grid-column:1/-1">No bikes available right now. Check back soon!</p>';
-            }
-            
-            // Sold bikes
             const soldGrid = document.getElementById('sold-grid');
-            if (inventory.sold.length > 0) {
-                soldGrid.innerHTML = inventory.sold.map(b => renderBike(b, true)).join('');
+            
+            if (inventory.available.length > 0) {
+                availableGrid.innerHTML = inventory.available.map(b => renderProduct(b, false)).join('');
             } else {
-                soldGrid.innerHTML = '<p style="text-align:center;color:var(--text-dim);grid-column:1/-1">Sold bikes will appear here.</p>';
+                availableGrid.innerHTML = '<div class="empty-state">No bikes currently available. Check back soon.</div>';
             }
             
-            // Update stats
+            if (inventory.sold.length > 0) {
+                soldGrid.innerHTML = inventory.sold.map(b => renderProduct(b, true)).join('');
+            } else {
+                soldGrid.innerHTML = '<div class="empty-state">Sold bikes will appear here as inventory moves.</div>';
+            }
+            
             document.getElementById('stat-available').textContent = inventory.available.length;
             document.getElementById('stat-sold').textContent = inventory.sold.length;
         }
         
         function handleSubmit(e) {
             e.preventDefault();
-            alert('Thanks for your message! I\'ll get back to you soon.');
+            alert('Message sent. I\'ll respond within 24 hours.');
             e.target.reset();
         }
         
