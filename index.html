@@ -3,39 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Rides | Vintage Mountain Bikes</title>
+    <title>Pat Ina | Vintage Mountain Bikes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Modern base */
-            --bg: #faf9f7;
-            --bg-alt: #f3f1ed;
-            --bg-card: #ffffff;
-            --text: #1c1c1c;
-            --text-light: #4a4a4a;
-            --text-muted: #7a7a7a;
-            --border: #e8e6e1;
+            --bg: #f7f5f2;
+            --bg-dark: #1a1714;
+            --bg-card: #fffefa;
+            --text: #1a1714;
+            --text-light: #5c564d;
+            --text-muted: #8a847a;
             
-            /* 90s MTB accent colors - used sparingly */
-            --neon-teal: #00d4aa;
-            --retro-purple: #7b4b94;
-            --sunset-orange: #e85d04;
-            
-            /* Patina/aged tones */
-            --patina-green: #4a7c6f;
-            --aged-brass: #b8956c;
-            --rust: #8b4513;
+            /* Patina colors - rust, oxidized copper, aged metal */
+            --rust: #8b4a2b;
+            --rust-light: #c4704a;
+            --copper-green: #4a6b5d;
+            --aged-bronze: #7a6b4e;
+            --oxidized: #5d7a6b;
+            --weathered: #a69580;
+            --warm-cream: #f5f0e6;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Outfit', -apple-system, sans-serif;
+            font-family: 'DM Sans', sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            font-weight: 400;
         }
         
         a { color: inherit; text-decoration: none; }
@@ -46,41 +42,58 @@
             padding: 0 32px;
         }
         
-        /* Navigation - clean modern */
+        /* Grain texture overlay for patina feel */
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+        
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(250,249,247,0.95);
+            background: rgba(247,245,242,0.9);
             backdrop-filter: blur(12px);
             z-index: 100;
-            padding: 20px 0;
+            border-bottom: 1px solid rgba(138,132,122,0.2);
         }
         
         .nav-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 72px;
         }
         
         .logo {
-            font-size: 1.4rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.8rem;
+            color: var(--rust);
+            position: relative;
         }
         
-        /* Subtle 90s touch - gradient underline on logo */
-        .logo span {
-            background: linear-gradient(90deg, var(--neon-teal), var(--retro-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--rust), var(--copper-green), transparent);
         }
         
         .nav-links {
             display: flex;
-            gap: 36px;
+            gap: 32px;
         }
         
         .nav-links a {
@@ -90,147 +103,230 @@
             transition: color 0.2s;
         }
         
-        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover { color: var(--rust); }
         
-        /* Hero - modern with subtle retro accent */
+        /* Hero */
         .hero {
-            min-height: 90vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            padding-top: 80px;
+            padding-top: 72px;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, var(--bg) 0%, var(--warm-cream) 50%, #ede8df 100%);
         }
         
-        /* Subtle 90s geometric accent - barely visible */
+        /* Patina texture spots */
         .hero::before {
             content: '';
             position: absolute;
-            top: 15%;
-            right: 5%;
+            top: 10%;
+            right: 10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(139,74,43,0.08) 0%, transparent 70%);
+            filter: blur(40px);
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            left: 5%;
             width: 300px;
             height: 300px;
-            background: linear-gradient(135deg, rgba(0,212,170,0.08), rgba(123,75,148,0.05));
-            border-radius: 50%;
-            filter: blur(60px);
+            background: radial-gradient(ellipse, rgba(74,107,93,0.06) 0%, transparent 70%);
+            filter: blur(50px);
         }
         
         .hero-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 80px;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
         
-        .hero-content {
-            max-width: 480px;
+        .hero-content h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--text);
         }
         
-        .hero h1 {
-            font-size: clamp(2.5rem, 4.5vw, 3.5rem);
-            font-weight: 600;
-            line-height: 1.15;
-            margin-bottom: 20px;
-            letter-spacing: -0.03em;
+        .hero-content h1 span {
+            color: var(--rust);
+            position: relative;
         }
         
-        .hero p {
-            font-size: 1.1rem;
+        .hero-content p {
+            font-size: 1.15rem;
             color: var(--text-light);
-            margin-bottom: 32px;
-            font-weight: 400;
-        }
-        
-        .btn-group {
-            display: flex;
-            gap: 12px;
+            margin-bottom: 36px;
+            max-width: 420px;
+            line-height: 1.7;
         }
         
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
+            display: inline-block;
+            padding: 16px 32px;
             font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
-            transition: all 0.25s ease;
         }
         
         .btn-primary {
-            background: var(--text);
+            background: var(--rust);
             color: #fff;
         }
         
         .btn-primary:hover {
-            background: #333;
+            background: var(--rust-light);
             transform: translateY(-2px);
         }
         
         .btn-outline {
             background: transparent;
-            border: 1.5px solid var(--border);
+            border: 1.5px solid var(--weathered);
             color: var(--text);
+            margin-left: 12px;
         }
         
         .btn-outline:hover {
-            border-color: var(--text);
+            border-color: var(--rust);
+            color: var(--rust);
         }
         
-        /* Hero image area with patina frame effect */
+        /* Hero featured bike display */
         .hero-visual {
             position: relative;
-            height: 450px;
         }
         
-        .hero-image-frame {
+        .featured-bike {
+            background: var(--bg-card);
+            border: 1px solid rgba(138,132,122,0.2);
+            padding: 24px;
+            position: relative;
+        }
+        
+        /* Rust corner accents */
+        .featured-bike::before,
+        .featured-bike::after {
+            content: '';
             position: absolute;
-            inset: 0;
-            background: var(--bg-alt);
-            border: 1px solid var(--border);
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--rust);
+            opacity: 0.4;
+        }
+        
+        .featured-bike::before {
+            top: -8px;
+            left: -8px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .featured-bike::after {
+            bottom: -8px;
+            right: -8px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        .featured-bike-image {
+            aspect-ratio: 4/3;
+            background: linear-gradient(145deg, #e8e4dc 0%, #d8d4cc 100%);
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
             overflow: hidden;
         }
         
-        /* Patina texture overlay */
-        .hero-image-frame::after {
+        /* Weathered texture on images */
+        .featured-bike-image::after {
             content: '';
             position: absolute;
             inset: 0;
             background: 
-                radial-gradient(ellipse at 20% 80%, rgba(74,124,111,0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(184,149,108,0.08) 0%, transparent 50%);
-            pointer-events: none;
+                radial-gradient(ellipse at 30% 70%, rgba(139,74,43,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(74,107,93,0.04) 0%, transparent 40%);
         }
         
-        .hero-image-placeholder {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            text-align: center;
-            padding: 20px;
+        .featured-bike-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
-        /* Stats strip with subtle 90s gradient accent */
-        .stats-strip {
-            padding: 48px 0;
-            background: var(--text);
+        .featured-label {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: var(--rust);
             color: #fff;
-            position: relative;
-            overflow: hidden;
+            padding: 6px 14px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
         
-        /* 90s style thin accent line */
-        .stats-strip::before {
+        .featured-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        
+        .featured-info h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+        
+        .featured-info .brand {
+            font-size: 0.8rem;
+            color: var(--copper-green);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .featured-info .price {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.8rem;
+            color: var(--rust);
+        }
+        
+        /* Stats bar with patina border */
+        .stats-bar {
+            background: var(--bg-dark);
+            color: var(--warm-cream);
+            padding: 48px 0;
+            position: relative;
+        }
+        
+        .stats-bar::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--neon-teal), var(--retro-purple), var(--sunset-orange));
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--rust) 0%, 
+                var(--rust-light) 25%, 
+                var(--copper-green) 50%, 
+                var(--oxidized) 75%, 
+                var(--aged-bronze) 100%
+            );
         }
         
         .stats-grid {
@@ -239,75 +335,80 @@
             text-align: center;
         }
         
-        .stat-item h3 {
-            font-size: 2rem;
-            font-weight: 600;
+        .stat h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.5rem;
             margin-bottom: 4px;
         }
         
-        .stat-item p {
+        .stat p {
             font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             opacity: 0.6;
         }
         
         /* Sections */
         section {
-            padding: 80px 0;
+            padding: 100px 0;
         }
         
         .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
             margin-bottom: 48px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(138,132,122,0.2);
         }
         
         .section-header h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.2rem;
         }
         
         .section-header p {
-            color: var(--text-light);
-            margin-top: 8px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
         
         /* Product grid */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
+            gap: 28px;
         }
         
         .product-card {
             background: var(--bg-card);
-            border: 1px solid var(--border);
+            border: 1px solid rgba(138,132,122,0.15);
             transition: all 0.3s ease;
             position: relative;
         }
         
         .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(26,23,20,0.1);
         }
         
-        .product-card.sold { opacity: 0.65; }
+        .product-card.sold {
+            opacity: 0.7;
+        }
         
         .product-image {
             aspect-ratio: 4/3;
-            background: var(--bg-alt);
+            background: linear-gradient(145deg, #eae6de, #ddd9d1);
             position: relative;
             overflow: hidden;
         }
         
-        /* Patina texture on product images */
         .product-image::after {
             content: '';
             position: absolute;
             inset: 0;
             background: 
-                linear-gradient(180deg, transparent 60%, rgba(74,124,111,0.06) 100%);
-            pointer-events: none;
+                radial-gradient(ellipse at 20% 80%, rgba(139,74,43,0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 10%, rgba(74,107,93,0.04) 0%, transparent 40%);
         }
         
         .product-image img {
@@ -324,31 +425,30 @@
             align-items: center;
             justify-content: center;
             color: var(--text-muted);
-            font-size: 0.85rem;
             gap: 8px;
         }
         
         .product-placeholder svg {
-            width: 48px;
-            height: 48px;
-            opacity: 0.3;
+            width: 40px;
+            height: 40px;
+            stroke: var(--weathered);
         }
         
         .product-badge {
             position: absolute;
             top: 12px;
             left: 12px;
-            background: var(--text);
+            background: var(--rust);
             color: #fff;
             padding: 5px 12px;
-            font-size: 0.7rem;
-            font-weight: 600;
+            font-size: 0.65rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.06em;
         }
         
         .product-badge.sold-badge {
-            background: var(--patina-green);
+            background: var(--copper-green);
         }
         
         .product-info {
@@ -356,17 +456,17 @@
         }
         
         .product-brand {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--patina-green);
+            letter-spacing: 0.1em;
+            color: var(--copper-green);
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
         
         .product-name {
-            font-size: 1.15rem;
-            font-weight: 600;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.2rem;
             margin-bottom: 2px;
         }
         
@@ -380,13 +480,14 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
+            padding-top: 14px;
+            border-top: 1px solid rgba(138,132,122,0.15);
         }
         
         .product-price {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
+            color: var(--rust);
         }
         
         .product-card.sold .product-price {
@@ -395,110 +496,94 @@
         }
         
         .product-link {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--text);
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            transition: color 0.2s;
         }
         
-        .product-link:hover {
-            color: var(--patina-green);
-        }
+        .product-link:hover { color: var(--rust); }
         
-        /* About section with patina accent */
+        /* About with patina styling */
         .about-section {
-            background: var(--bg-alt);
+            background: var(--warm-cream);
             position: relative;
-        }
-        
-        /* Subtle patina corner accent */
-        .about-section::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 40%;
-            height: 60%;
-            background: radial-gradient(ellipse at 100% 100%, rgba(74,124,111,0.06) 0%, transparent 60%);
-            pointer-events: none;
         }
         
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 64px;
+            gap: 80px;
             align-items: center;
         }
         
         .about-image {
-            aspect-ratio: 4/3;
-            background: var(--border);
+            aspect-ratio: 1/1;
+            background: linear-gradient(145deg, #d8d4c8, #c8c4b8);
             position: relative;
         }
         
-        /* Aged frame effect */
+        /* Rust frame effect */
         .about-image::before {
             content: '';
             position: absolute;
-            inset: -8px;
-            border: 1px solid var(--aged-brass);
-            opacity: 0.3;
+            inset: -12px;
+            border: 2px solid transparent;
+            border-image: linear-gradient(135deg, var(--rust), var(--copper-green), var(--aged-bronze)) 1;
         }
         
         .about-content h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            letter-spacing: -0.02em;
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            margin-bottom: 24px;
         }
         
         .about-content p {
             color: var(--text-light);
             margin-bottom: 16px;
-            line-height: 1.7;
+            line-height: 1.8;
         }
         
         /* Contact */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 64px;
+            gap: 80px;
         }
         
         .contact-info h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 16px;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
         }
         
         .contact-info p {
             color: var(--text-light);
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
         
         .contact-item {
             display: flex;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 16px;
+            margin-bottom: 14px;
             font-size: 0.95rem;
         }
         
-        .contact-item-label {
+        .contact-label {
             color: var(--text-muted);
-            min-width: 70px;
+            min-width: 80px;
         }
         
         .contact-form input,
         .contact-form textarea {
             width: 100%;
-            padding: 14px 16px;
+            padding: 14px 18px;
             background: var(--bg-card);
-            border: 1px solid var(--border);
+            border: 1px solid rgba(138,132,122,0.2);
             font-family: inherit;
             font-size: 0.95rem;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             transition: border-color 0.2s;
         }
         
@@ -510,14 +595,14 @@
         .contact-form input:focus,
         .contact-form textarea:focus {
             outline: none;
-            border-color: var(--text);
+            border-color: var(--rust);
         }
         
         /* Footer */
         footer {
-            background: var(--text);
-            color: #fff;
-            padding: 40px 0;
+            background: var(--bg-dark);
+            color: var(--warm-cream);
+            padding: 48px 0;
         }
         
         .footer-inner {
@@ -527,8 +612,9 @@
         }
         
         .footer-logo {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
+            color: var(--rust-light);
         }
         
         .footer-text {
@@ -536,43 +622,33 @@
             font-size: 0.85rem;
         }
         
-        /* Empty state */
-        .empty-state {
-            text-align: center;
-            padding: 48px;
-            color: var(--text-muted);
-            grid-column: 1 / -1;
-            font-size: 0.95rem;
-        }
-        
         /* Responsive */
         @media (max-width: 900px) {
             .hero-grid, .about-grid, .contact-grid { 
                 grid-template-columns: 1fr; 
-                gap: 40px; 
+                gap: 48px; 
             }
-            .hero { min-height: auto; padding: 120px 0 60px; }
-            .hero-visual { height: 300px; }
+            .hero { min-height: auto; padding: 100px 0 60px; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
             .nav-links { display: none; }
+            .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
         }
         
         @media (max-width: 500px) {
-            .stats-grid { grid-template-columns: 1fr 1fr; }
             .product-grid { grid-template-columns: 1fr; }
-            .btn-group { flex-direction: column; }
-            .btn { justify-content: center; }
         }
     </style>
 </head>
 <body>
+    <div class="grain"></div>
+    
     <nav>
         <div class="container">
             <div class="nav-inner">
-                <a href="#" class="logo">Retro <span>Rides</span></a>
+                <a href="#" class="logo">Pat Ina</a>
                 <div class="nav-links">
                     <a href="#collection">Collection</a>
-                    <a href="#sold">Archive</a>
+                    <a href="#sold">Sold</a>
                     <a href="#about">Story</a>
                     <a href="#contact">Contact</a>
                 </div>
@@ -584,18 +660,23 @@
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-content">
-                    <h1>Vintage Steel.<br>Timeless Rides.</h1>
-                    <p>Hand-selected mountain bikes from the golden era. Each frame tells a story. Each ride takes you back.</p>
-                    <div class="btn-group">
-                        <a href="#collection" class="btn btn-primary">View Collection</a>
-                        <a href="#contact" class="btn btn-outline">Get in Touch</a>
-                    </div>
+                    <h1>Vintage Steel.<br><span>Honest Wear.</span></h1>
+                    <p>Hand-picked mountain bikes from the golden era. Original patina preserved. Every dent tells a story. Every scratch earned on the trail.</p>
+                    <a href="#collection" class="btn btn-primary">View Collection</a>
+                    <a href="#contact" class="btn btn-outline">Contact</a>
                 </div>
                 <div class="hero-visual">
-                    <div class="hero-image-frame">
-                        <div class="hero-image-placeholder">
-                            Your featured bike photo here<br>
-                            <small style="opacity:0.6">Upload coming soon</small>
+                    <div class="featured-bike">
+                        <div class="featured-bike-image">
+                            <span class="featured-label">Featured</span>
+                            <img src="https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?w=600&h=450&fit=crop&sat=-30" alt="Featured vintage MTB">
+                        </div>
+                        <div class="featured-info">
+                            <div>
+                                <div class="brand">Klein</div>
+                                <h3>Attitude Race</h3>
+                            </div>
+                            <div class="price">€1,290</div>
                         </div>
                     </div>
                 </div>
@@ -603,22 +684,22 @@
         </div>
     </section>
     
-    <div class="stats-strip">
+    <div class="stats-bar">
         <div class="container">
             <div class="stats-grid">
-                <div class="stat-item">
-                    <h3 id="stat-available">0</h3>
+                <div class="stat">
+                    <h3 id="stat-available">5</h3>
                     <p>Available</p>
                 </div>
-                <div class="stat-item">
-                    <h3 id="stat-sold">0</h3>
+                <div class="stat">
+                    <h3 id="stat-sold">3</h3>
                     <p>Sold</p>
                 </div>
-                <div class="stat-item">
-                    <h3>1985–99</h3>
+                <div class="stat">
+                    <h3>1985-99</h3>
                     <p>Era</p>
                 </div>
-                <div class="stat-item">
+                <div class="stat">
                     <h3>EU</h3>
                     <p>Shipping</p>
                 </div>
@@ -630,17 +711,17 @@
         <div class="container">
             <div class="section-header">
                 <h2>Available Now</h2>
-                <p>Inspected, serviced, ready for their next chapter.</p>
+                <p>Original condition. Patina preserved.</p>
             </div>
             <div class="product-grid" id="available-grid"></div>
         </div>
     </section>
     
-    <section id="sold" style="background: var(--bg-alt)">
+    <section id="sold" style="background: var(--warm-cream)">
         <div class="container">
             <div class="section-header">
                 <h2>Recently Sold</h2>
-                <p>These found new homes. New arrivals weekly.</p>
+                <p>Found new homes.</p>
             </div>
             <div class="product-grid" id="sold-grid"></div>
         </div>
@@ -651,10 +732,10 @@
             <div class="about-grid">
                 <div class="about-image"></div>
                 <div class="about-content">
-                    <h2>The Hunt for Vintage Steel</h2>
-                    <p>Every bike here is hand-picked from across Europe. I search daily for forgotten classics — Stumpjumpers tucked in Austrian garages, Zaskars gathering dust in Italian sheds.</p>
-                    <p>When I find one, I bring it back. New cables, fresh grease, tuned derailleurs. Some need full restoration. Others just need someone who appreciates what they are.</p>
-                    <p>These aren't just bikes. They're the machines that defined mountain biking.</p>
+                    <h2>Preserved, Not Polished</h2>
+                    <p>Every bike here carries its history. The scratches from rocky descents. The worn decals from decades of storage. The honest patina of a machine that was ridden, not displayed.</p>
+                    <p>I don't strip and repaint. I don't hide the dents. I clean, service, and preserve. What you get is authentic - a time capsule from mountain biking's defining years.</p>
+                    <p>Based in Central Europe, shipping across the continent. Each bike photographed as-is, flaws and all.</p>
                 </div>
             </div>
         </div>
@@ -664,22 +745,18 @@
         <div class="container">
             <div class="section-header">
                 <h2>Get in Touch</h2>
-                <p>Questions about a bike? Want to sell one? Let's talk.</p>
+                <p>Questions welcome.</p>
             </div>
             <div class="contact-grid">
                 <div class="contact-info">
-                    <h3>Based in Central Europe</h3>
-                    <p>Local pickup in Slovenia/Austria. Shipping arranged across Europe.</p>
+                    <h3>Location</h3>
+                    <p>Based in Slovenia. Local pickup available. Shipping arranged throughout Europe.</p>
                     <div class="contact-item">
-                        <span class="contact-item-label">Location</span>
-                        <span>Slovenia / Austria</span>
+                        <span class="contact-label">Email</span>
+                        <span>hello@patina.bikes</span>
                     </div>
                     <div class="contact-item">
-                        <span class="contact-item-label">Email</span>
-                        <span>hello@retrorides.eu</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-item-label">Response</span>
+                        <span class="contact-label">Response</span>
                         <span>Within 24 hours</span>
                     </div>
                 </div>
@@ -687,7 +764,7 @@
                     <input type="text" placeholder="Name" required>
                     <input type="email" placeholder="Email" required>
                     <textarea placeholder="Message"></textarea>
-                    <button type="submit" class="btn btn-primary" style="width:100%">Send</button>
+                    <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
                 </form>
             </div>
         </div>
@@ -696,33 +773,83 @@
     <footer>
         <div class="container">
             <div class="footer-inner">
-                <div class="footer-logo">Retro Rides</div>
-                <div class="footer-text">Est. 2026</div>
+                <div class="footer-logo">Pat Ina</div>
+                <div class="footer-text">Vintage bikes, honest wear.</div>
             </div>
         </div>
     </footer>
     
     <script>
-        // Inventory - add your actual bikes here
         const inventory = {
             available: [
                 {
-                    id: 1,
+                    brand: 'Klein',
+                    name: 'Attitude Race',
+                    year: '1993',
+                    price: 1290,
+                    badge: 'Featured',
+                    image: 'https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?w=500&h=375&fit=crop&sat=-30'
+                },
+                {
+                    brand: 'Specialized',
+                    name: 'Stumpjumper M2',
+                    year: '1991',
+                    price: 680,
+                    badge: null,
+                    image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=500&h=375&fit=crop&sat=-30'
+                },
+                {
+                    brand: 'GT',
+                    name: 'Zaskar LE',
+                    year: '1994',
+                    price: 850,
+                    badge: 'Rare',
+                    image: 'https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?w=500&h=375&fit=crop&sat=-30'
+                },
+                {
+                    brand: 'Ritchey',
+                    name: 'P-23',
+                    year: '1989',
+                    price: 1450,
+                    badge: null,
+                    image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=500&h=375&fit=crop&sat=-30'
+                },
+                {
                     brand: 'Kuwahara',
                     name: 'Cascade',
                     year: '1988',
-                    price: 289,
-                    badge: 'New',
-                    image: null
+                    price: 320,
+                    badge: 'New In',
+                    image: 'https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=500&h=375&fit=crop&sat=-30'
                 }
             ],
-            sold: []
+            sold: [
+                {
+                    brand: 'Yeti',
+                    name: 'ARC',
+                    year: '1992',
+                    price: 2100,
+                    image: 'https://images.unsplash.com/photo-1596495578065-6e0763fa1178?w=500&h=375&fit=crop&sat=-30'
+                },
+                {
+                    brand: 'Fat Chance',
+                    name: 'Yo Eddy',
+                    year: '1990',
+                    price: 1850,
+                    image: 'https://images.unsplash.com/photo-1505705694340-019e1e335916?w=500&h=375&fit=crop&sat=-30'
+                },
+                {
+                    brand: 'Bontrager',
+                    name: 'Race Lite',
+                    year: '1995',
+                    price: 920,
+                    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=375&fit=crop&sat=-30'
+                }
+            ]
         };
         
-        // Bike icon SVG
         const bikeIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="5" cy="17" r="3"/>
-            <circle cx="19" cy="17" r="3"/>
+            <circle cx="5" cy="17" r="3"/><circle cx="19" cy="17" r="3"/>
             <path d="M12 17l-3-6h6l-3 6zM5 17l4-8h6M19 17l-4-8"/>
         </svg>`;
         
@@ -732,7 +859,7 @@
                     <div class="product-image">
                         ${item.image 
                             ? `<img src="${item.image}" alt="${item.name}">`
-                            : `<div class="product-placeholder">${bikeIcon}<span>Photo soon</span></div>`
+                            : `<div class="product-placeholder">${bikeIcon}</div>`
                         }
                         ${item.badge && !isSold ? `<span class="product-badge">${item.badge}</span>` : ''}
                         ${isSold ? `<span class="product-badge sold-badge">Sold</span>` : ''}
@@ -742,8 +869,8 @@
                         <h3 class="product-name">${item.name}</h3>
                         <div class="product-year">${item.year}</div>
                         <div class="product-footer">
-                            <span class="product-price">€${item.price}</span>
-                            ${!isSold ? `<a href="#contact" class="product-link">Inquire →</a>` : ''}
+                            <span class="product-price">€${item.price.toLocaleString()}</span>
+                            ${!isSold ? `<a href="#contact" class="product-link">Inquire</a>` : ''}
                         </div>
                     </div>
                 </article>
@@ -751,24 +878,17 @@
         }
         
         function render() {
-            const availableGrid = document.getElementById('available-grid');
-            const soldGrid = document.getElementById('sold-grid');
-            
-            availableGrid.innerHTML = inventory.available.length 
-                ? inventory.available.map(b => renderProduct(b)).join('')
-                : '<div class="empty-state">No bikes available right now. Check back soon.</div>';
-            
-            soldGrid.innerHTML = inventory.sold.length
-                ? inventory.sold.map(b => renderProduct(b, true)).join('')
-                : '<div class="empty-state">Sold archive coming soon.</div>';
-            
+            document.getElementById('available-grid').innerHTML = 
+                inventory.available.map(b => renderProduct(b)).join('');
+            document.getElementById('sold-grid').innerHTML = 
+                inventory.sold.map(b => renderProduct(b, true)).join('');
             document.getElementById('stat-available').textContent = inventory.available.length;
             document.getElementById('stat-sold').textContent = inventory.sold.length;
         }
         
         function handleSubmit(e) {
             e.preventDefault();
-            alert('Message sent. I\'ll respond within 24 hours.');
+            alert('Message sent.');
             e.target.reset();
         }
         
